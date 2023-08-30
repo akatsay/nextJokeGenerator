@@ -37,7 +37,7 @@ export const getServerSideProps = async ({query}: NextPageContext) => {
   const openai = new OpenAIApi(configuration)
 
   const requestParams = {
-    prompt: { jokeText }.toString(),
+    prompt: jokeText,
     n: 1,
     size: '512x512',
   }
@@ -52,11 +52,11 @@ export const getServerSideProps = async ({query}: NextPageContext) => {
       },
     }
   } catch (error) {
-    console.log(error)
+    console.log('Error generating image', error)
     return {
       props: {
         jokeText,
-        error,
+        error: 'Error generating image',
       },
     }
   }
